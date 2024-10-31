@@ -30,6 +30,8 @@ jobs:
           commits = list(repo.iter_commits('main', max_count=2))
           if len(commits) < 2:
               print("Not enough commits to compare.")
+              with open("diff_report.txt", "w") as report:
+                  report.write("Not enough commits to generate a diff.")
               exit(0)
           
           # Compare latest and previous commits
