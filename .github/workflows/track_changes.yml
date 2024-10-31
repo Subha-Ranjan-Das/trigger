@@ -2,7 +2,7 @@ name: Track Code Changes
 
 on:
   push:
-    branches: [ "main" ]  # Adjust branch as needed
+    branches: ["main"] # Adjust branch as needed
 
 jobs:
   track_changes:
@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install GitPython
         run: pip install gitpython
@@ -24,22 +24,37 @@ jobs:
         run: |
           python - <<EOF
           import git
-          repo = git.Repo(".")
-          
-          # Get the last two commits
-          commits = list(repo.iter_commits('main', max_count=2))
-          if len(commits) < 2:
-              print("Not enough commits to compare.")
+          import os
+
+          # Function to generate diff report
+          def generate_diff_report():
+              # Initialize the repository
+              repo = git.Repo(".")
+
+              # Get the last two commits
+              commits = list(repo.iter_commits('main', max_count=2))
+
+              # Check if we have at least two commits
+              if len(commits) < 2:
+                  print("Not enough commits to compare.")
+                  with open("diff_report.txt", "w") as report:
+                      report.write("Not enough commits to generate a diff.")
+                  return
+
+              # Compare latest and previous commits
+              diff_text = repo.git.diff(commits[1], commits[0])
+
+              # Write diff to a report file
               with open("diff_report.txt", "w") as report:
-                  report.write("Not enough commits to generate a diff.")
-              exit(0)
-          
-          # Compare latest and previous commits
-          diff_text = repo.git.diff(commits[1], commits[0])
-          
-          # Write diff to a report file
-          with open("diff_report.txt", "w") as report:
-              report.write(diff_text)
+                  if diff_text:
+                      report.write(diff_text)
+                      print("Diff report generated successfully.")
+                  else:
+                      report.write("No changes detected between the commits.")
+                      print("No changes detected between the commits.")
+
+          # Execute the function
+          generate_diff_report()
           EOF
 
       - name: Upload Diff Report
