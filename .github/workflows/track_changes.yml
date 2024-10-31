@@ -1,0 +1,47 @@
+name: Track Code Changes
+
+on:
+  push:
+    branches: [ "main" ]  # Adjust branch as needed
+
+jobs:
+  track_changes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install GitPython
+        run: pip install gitpython
+
+      - name: Compare Commits and Generate Report
+        run: |
+          python - <<EOF
+          import git
+          repo = git.Repo(".")
+          
+          # Get the last two commits
+          commits = list(repo.iter_commits('main', max_count=2))
+          if len(commits) < 2:
+              print("Not enough commits to compare.")
+              exit(0)
+          
+          # Compare latest and previous commits
+          diff_text = repo.git.diff(commits[1], commits[0])
+          
+          # Write diff to a report file
+          with open("diff_report.txt", "w") as report:
+              report.write(diff_text)
+          EOF
+
+      - name: Upload Diff Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: Diff Report
+          path: diff_report.txt
