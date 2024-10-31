@@ -1,0 +1,82 @@
+his article is about the python programming language. For the animal, see Python (genus).
+Python
+
+Paradigm	Multi-paradigm: object-oriented,[1] procedural (imperative), functional, structured, reflective
+Designed by	Guido van Rossum
+Developer	Python Software Foundation
+First appeared	20 February 1991; 33 years ago[2]
+Stable release	
+3.13.0 Edit this on Wikidata / 7 October 2024; 24 days ago
+Typing discipline	duck, dynamic, strong;[3] optional type annotations (since 3.5, but those hints are ignored, except with unofficial tools)[4]
+OS	
+Tier 1: 64-bit Linux, macOS; 64- and 32-bit Windows 10+[5]
+Tier 2: E.g. 32-bit WebAssembly (WASI)
+Tier 3: 64-bit Android,[6] iOS, FreeBSD, and (32-bit) Raspberry Pi OS
+Unofficial (or has been known to work): Other Unix-like/BSD variants) and a few other platforms[7][8][9]
+License	Python Software Foundation License
+Filename extensions	.py, .pyw, .pyz,[10]
+.pyi, .pyc, .pyd
+Website	python.org
+Major implementations
+CPython, PyPy, Stackless Python, MicroPython, CircuitPython, IronPython, Jython
+Dialects
+Cython, RPython, Starlark[11]
+Influenced by
+ABC,[12] Ada,[13] ALGOL 68,[14]
+APL,[15] C,[16] C++,[17] CLU,[18] Dylan,[19]
+Haskell,[20][15] Icon,[21] Lisp,[22]
+Modula-3,[14][17] Perl,[23] Standard ML[15]
+Influenced
+Apache Groovy, Boo, Cobra, CoffeeScript,[24] D, F#, GDScript, Go, JavaScript,[25][26] Julia,[27] Mojo,[28] Nim, Ring,[29] Ruby,[30] Swift[31]
+ Python Programming at Wikibooks
+Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation.[32]
+
+Python is dynamically typed and garbage-collected. It supports multiple programming paradigms, including structured (particularly procedural), object-oriented and functional programming. It is often described as a "batteries included" language due to its comprehensive standard library.[33][34]
+
+Guido van Rossum began working on Python in the late 1980s as a successor to the ABC programming language and first released it in 1991 as Python 0.9.0.[35] Python 2.0 was released in 2000. Python 3.0, released in 2008, was a major revision not completely backward-compatible with earlier versions. Python 2.7.18, released in 2020, was the last release of Python 2.[36]
+
+Python consistently ranks as one of the most popular programming languages, and has gained widespread use in the machine learning community.[37][38][39][40]
+
+History
+Main article: History of Python
+
+The designer of Python, Guido van Rossum, at OSCON 2006
+Python was invented in the late 1980s[41] by Guido van Rossum at Centrum Wiskunde & Informatica (CWI) in the Netherlands as a successor to the ABC programming language, which was inspired by SETL,[42] capable of exception handling and interfacing with the Amoeba operating system.[12] Its implementation began in December 1989.[43] Van Rossum shouldered sole responsibility for the project, as the lead developer, until 12 July 2018, when he announced his "permanent vacation" from his responsibilities as Python's "benevolent dictator for life" (BDFL), a title the Python community bestowed upon him to reflect his long-term commitment as the project's chief decision-maker[44] (he has since come out of retirement and is self-titled "BDFL-emeritus"). In January 2019, active Python core developers elected a five-member Steering Council to lead the project.[45][46]
+
+Python 2.0 was released on 16 October 2000, with many major new features such as list comprehensions, cycle-detecting garbage collection, reference counting, and Unicode support.[47] Python 3.0 was released on 3 December 2008, with many of its major features backported to Python 2.6.x[48] and 2.7.x. Releases of Python 3 include the 2to3 utility, which automates the translation of Python 2 code to Python 3.[49]
+
+Python 2.7's end-of-life was initially set for 2015, then postponed to 2020 out of concern that a large body of existing code could not easily be forward-ported to Python 3.[50][51] No further security patches or other improvements will be released for it.[52][53] Currently only 3.9 and later are supported (2023 security issues were fixed in e.g. 3.7.17, the final 3.7.x release[54]). While Python 2.7 and older is officially unsupported, a different unofficial Python implementation, PyPy, continues to support Python 2, i.e. "2.7.18+" (plus 3.10), with the plus meaning (at least some) "backported security updates".[55]
+
+In 2021 (and again twice in 2022, and in September 2024 for Python 3.12.6 down to 3.8.20), security updates were expedited, since all Python versions were insecure (including 2.7[56]) because of security issues leading to possible remote code execution[57] and web-cache poisoning.[58] In 2022, Python 3.10.4 and 3.9.12 were expedited[59] and 3.8.13, because of many security issues.[60] When Python 3.9.13 was released in May 2022, it was announced that the 3.9 series (joining the older series 3.8 and 3.7) would only receive security fixes in the future.[61] On 7 September 2022, four new releases were made due to a potential denial-of-service attack: 3.10.7, 3.9.14, 3.8.14, and 3.7.14.[62][63]
+
+Every Python release since 3.5 has added some syntax to the language. 3.10 added the | union type operator[64] and the match and case keywords (for structural pattern matching statements). 3.11 expanded exception handling functionality. Python 3.12 added the new keyword type. Notable changes in 3.11 from 3.10 include increased program execution speed and improved error reporting.[65] Python 3.11 claims to be between 10 and 60% faster than Python 3.10, and Python 3.12 adds another 5% on top of that. It also has improved error messages, and many other changes.
+
+Python 3.13 introduces more syntax for types, a new and improved interactive interpreter (REPL), featuring multi-line editing and color support; an incremental garbage collector (producing shorter pauses for collection in programs with a lot of objects, and addition to the improved speed in 3.11 and 3.12), and an experimental just-in-time (JIT) compiler (such features, can/needs to be enabled specifically for the increase in speed),[66] and an experimental free-threaded build mode, which disables the global interpreter lock (GIL), allowing threads to run more concurrently, that latter feature enabled with python3.13t or python3.13t.exe.
+
+Python 3.13 introduces some change in behavior, i.e. new "well-defined semantics", fixing bugs (plus many removals of deprecated classes, functions and methods, and removed some of the C API and outdated modules): "The [old] implementation of locals() and frame.f_locals is slow, inconsistent and buggy [and it has] has many corner cases and oddities. Code that works around those may need to be changed. Code that uses locals() for simple templating, or print debugging, will continue to work correctly."[67]
+
+Since 7 October 2024, Python 3.13 is the latest stable release, and 3.13 and 3.12 are the only versions with active (as opposed to just security) support and Python 3.9 is the oldest supported version of Python (albeit in the 'security support' phase), due to Python 3.8 reaching end-of-life.[68] Starting with 3.13, it and later versions have 2 years of full support (up from one and a half); followed by 3 years of security support (for same total support as before).
+
+Some (more) standard library modules and many deprecated classes, functions and methods, will be removed in Python 3.15 or 3.16.[69][70]
+
+Python 3.14 (now in alpha 1)[71] has changes for annotations, with PEP 649 "[preserving] nearly all existing behavior of annotations from stock semantics".[72]
+
+Design philosophy and features
+Python is a multi-paradigm programming language. Object-oriented programming and structured programming are fully supported, and many of their features support functional programming and aspect-oriented programming (including metaprogramming[73] and metaobjects).[74] Many other paradigms are supported via extensions, including design by contract[75][76] and logic programming.[77] Python is known as a glue language,[78] able to work very well with many other languages with ease of access.
+
+Python uses dynamic typing and a combination of reference counting and a cycle-detecting garbage collector for memory management.[79] It uses dynamic name resolution (late binding), which binds method and variable names during program execution.
+
+Its design offers some support for functional programming in the Lisp tradition. It has filter,mapandreduce functions; list comprehensions, dictionaries, sets, and generator expressions.[80] The standard library has two modules (itertools and functools) that implement functional tools borrowed from Haskell and Standard ML.[81]
+
+Its core philosophy is summarized in the Zen of Python (PEP 20), which includes aphorisms such as:[82]
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Readability counts.
+However, Python features regularly violate these principles and have received criticism for adding unnecessary language bloat.[83] Responses to these criticisms are that the Zen of Python is a guideline rather than a rule.[84] The addition of some new features had been so controversial that Guido van Rossum resigned as Benevolent Dictator for Life following vitriol over the addition of the assignment expression operator in Python 3.8.[85][86]
+
+Nevertheless, rather than building all of its functionality into its core, Python was designed to be highly extensible via modules. This compact modularity has made it particularly popular as a means of adding programmable interfaces to existing applications. Van Rossum's vision of a small core language with a large standard library and easily extensible interpreter stemmed from his frustrations with ABC, which espoused the opposite approach.[41]
+
+Python claims to strive for a simpler, less-cluttered syntax and grammar while giving developers a choice in their coding methodology. In contrast to Perl's "there is more than one way to do it" motto, Python embraces a "there should be one—and preferably only one—obvious way to do it." philosophy.[82] In practice, however, Python provides many ways to achieve the same task. There are, for example, at least three ways to format a string literal, with no certainty as to which one a programmer should use.[87] Alex Martelli, a Fellow at the Python Software Foundation and Python book 
