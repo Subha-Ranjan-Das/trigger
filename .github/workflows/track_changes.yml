@@ -31,41 +31,40 @@ jobs:
 
           # Function to generate diff report
           def generate_diff_report():
-              # Initialize the repository
               repo = git.Repo(".")
+
+              # Fetch the latest changes from the remote
+              repo.remotes.origin.fetch()
 
               # Get all commits in the main branch
               commits = list(repo.iter_commits('main'))
 
-              # Define GitHub repo details
-              username = "Subha-Ranjan-Das"       # Replace with your GitHub username
-              repo_name = "trigger"     # Replace with your repository name
-
-              # Check for commits and generate a report accordingly
+              # Check if there's at least one commit
               if len(commits) == 0:
                   print("No commits in the branch.")
                   with open("diff_report.txt", "w") as report:
                       report.write("No commits in the branch to generate a diff.\n")
                   return
 
+              # Print commit hashes for debugging
+              print(f"Found {len(commits)} commits.")
+              for i, commit in enumerate(commits):
+                  print(f"Commit {i}: {commit.hexsha}")
+
+              # If there's only one commit, compare it against an empty tree (initial commit)
               if len(commits) == 1:
-                  # Compare the single commit against an empty tree (initial commit)
                   diff_text = repo.git.diff(commits[0].tree)
-                  compare_url = f"https://github.com/{username}/{repo_name}/commit/{commits[0].hexsha}"
               else:
                   # Get the last two commits and compare them
                   diff_text = repo.git.diff(commits[1], commits[0], name_status=True)
-                  compare_url = f"https://github.com/{username}/{repo_name}/compare/{commits[1].hexsha}...{commits[0].hexsha}"
 
-              # Write the diff and URL to diff_report.txt
+              # Write the diff to diff_report.txt
               with open("diff_report.txt", "w") as report:
                   if diff_text:
-                      report.write(diff_text + "\n")
-                      report.write(f"\nGitHub Compare URL: {compare_url}\n")
+                      report.write(diff_text)
                       print("Diff report generated successfully.")
                   else:
                       report.write("No changes detected between the commits.\n")
-                      report.write(f"\nGitHub Compare URL: {compare_url}\n")
                       print("No changes detected between the commits.")
 
           # Execute the diff report generation
