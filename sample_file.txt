@@ -1,2 +1,3 @@
 New line added to sample_file.txt
 New line added to sample_file.txt
+New line added to sample_file.txt

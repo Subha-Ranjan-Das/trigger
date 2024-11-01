@@ -28,6 +28,7 @@ jobs:
         run: |
           python - <<EOF
           import git
+          from git import Repo
 
           # Function to generate diff report
           def generate_diff_report():
